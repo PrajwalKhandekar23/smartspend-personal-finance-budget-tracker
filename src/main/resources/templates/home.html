@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>SmartSpend - Home</title>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+		rel="stylesheet">
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			font-family: Poppins, sans-serif;
+			scroll-behavior: smooth
+		}
+
+		body {
+			background: #f4f7f6;
+			color: #1f2937
+		}
+
+		header {
+			position: sticky;
+			top: 0;
+			z-index: 100;
+			background: rgba(15, 76, 58, .95);
+			backdrop-filter: blur(8px);
+			padding: 18px 7%;
+			display: flex;
+			justify-content: space-between;
+			align-items: center
+		}
+
+		.logo {
+			font-size: 28px;
+			font-weight: 700;
+			color: #fff
+		}
+
+		nav a {
+			text-decoration: none;
+			color: #fff;
+			margin-left: 28px;
+			transition: .3s
+		}
+
+		nav a:hover {
+			color: #9ae6b4
+		}
+
+		.hero {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 90px 8%;
+			min-height: 90vh;
+			background: linear-gradient(135deg, #0f4c3a, #166534);
+			overflow: hidden
+		}
+
+		.left {
+			max-width: 560px;
+			color: #fff;
+			animation: leftIn 1s ease
+		}
+
+		.left h1 {
+			font-size: 56px;
+			line-height: 1.2
+		}
+
+		.left span {
+			color: #86efac
+		}
+
+		.left p {
+			margin: 25px 0;
+			font-size: 18px;
+			line-height: 1.8;
+			color: #d1fae5
+		}
+
+		.btns a {
+			text-decoration: none;
+			padding: 14px 30px;
+			border-radius: 40px;
+			font-weight: 600;
+			display: inline-block;
+			margin-right: 15px;
+			transition: .35s
+		}
+
+		.primary {
+			background: #22c55e;
+			color: #fff
+		}
+
+		.secondary {
+			background: #fff;
+			color: #166534
+		}
+
+		.btns a:hover {
+			transform: translateY(-4px);
+			box-shadow: 0 12px 24px rgba(0, 0, 0, .2)
+		}
+
+		.right {
+			animation: rightIn 1s ease
+		}
+
+		.mock {
+			width: 520px;
+			background: #fff;
+			border-radius: 18px;
+			padding: 18px;
+			box-shadow: 0 25px 50px rgba(0, 0, 0, .25)
+		}
+
+		.bar {
+			height: 14px;
+			background: #0f4c3a;
+			border-radius: 8px;
+			margin-bottom: 16px
+		}
+
+		.grid {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 15px
+		}
+
+		.box {
+			height: 120px;
+			background: #eef7f2;
+			border-radius: 12px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			color: #166534;
+			font-weight: 600
+		}
+
+		section {
+			padding: 80px 8%
+		}
+
+		.title {
+			text-align: center;
+			font-size: 38px;
+			color: #0f4c3a;
+			margin-bottom: 18px
+		}
+
+		.sub {
+			text-align: center;
+			color: #6b7280;
+			margin-bottom: 45px
+		}
+
+		.cards {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+			gap: 25px
+		}
+
+		.card {
+			background: #fff;
+			border-radius: 18px;
+			padding: 28px;
+			box-shadow: 0 8px 25px rgba(0, 0, 0, .08);
+			transition: .35s;
+			border-top: 4px solid transparent
+		}
+
+		.card:hover {
+			transform: translateY(-8px);
+			border-color: #22c55e
+		}
+
+		.card .icon {
+			font-size: 40px
+		}
+
+		.card h3 {
+			margin: 15px 0;
+			color: #0f4c3a
+		}
+
+		.steps {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+			gap: 25px
+		}
+
+		.step {
+			text-align: center;
+			background: #fff;
+			padding: 30px;
+			border-radius: 18px;
+			box-shadow: 0 8px 20px rgba(0, 0, 0, .08)
+		}
+
+		.circle {
+			width: 70px;
+			height: 70px;
+			border-radius: 50%;
+			background: #22c55e;
+			color: #fff;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-size: 28px;
+			font-weight: 700;
+			margin: 0 auto 15px
+		}
+
+		.cta {
+			background: linear-gradient(135deg, #0f4c3a, #166534);
+			border-radius: 25px;
+			padding: 60px;
+			color: #fff;
+			text-align: center
+		}
+
+		.cta h2 {
+			font-size: 40px
+		}
+
+		.cta p {
+			margin: 18px auto 30px;
+			max-width: 700px;
+			color: #d1fae5
+		}
+
+		footer {
+			background: #0f4c3a;
+			color: #d1fae5;
+			text-align: center;
+			padding: 30px;
+			margin-top: 60px
+		}
+
+		.float {
+			position: fixed;
+			border-radius: 50%;
+			background: rgba(34, 197, 94, .15);
+			animation: float 10s infinite ease-in-out;
+			z-index: -1
+		}
+
+		.f1 {
+			width: 180px;
+			height: 180px;
+			top: 10%;
+			left: -50px
+		}
+
+		.f2 {
+			width: 120px;
+			height: 120px;
+			bottom: 10%;
+			right: 5%
+		}
+
+		@keyframes float {
+			50% {
+				transform: translateY(-30px) translateX(20px)
+			}
+		}
+
+		@keyframes leftIn {
+			from {
+				opacity: 0;
+				transform: translateX(-60px)
+			}
+
+			to {
+				opacity: 1;
+				transform: none
+			}
+		}
+
+		@keyframes rightIn {
+			from {
+				opacity: 0;
+				transform: translateX(60px)
+			}
+
+			to {
+				opacity: 1;
+				transform: none
+			}
+		}
+
+		@media(max-width:900px) {
+			.hero {
+				flex-direction: column;
+				text-align: center
+			}
+
+			.mock {
+				width: 100%;
+				margin-top: 40px
+			}
+
+			.left h1 {
+				font-size: 42px
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div class="float f1"></div>
+	<div class="float f2"></div>
+	<header>
+		<div class="logo">💰 SmartSpend</div>
+		<nav>
+			<a href="#features">Features</a>
+			<a href="#how">How it Works</a>
+			<a th:href="@{/login}">Login</a>
+			<a th:href="@{/register}">Register</a>
+		</nav>
+	</header>
+
+	<section class="hero">
+		<div class="left">
+			<h1>Manage Your <span>Finances Smarter</span></h1>
+			<p>SmartSpend helps you track expenses, manage monthly budgets, analyze spending patterns and make informed
+				financial decisions through an intuitive dashboard.</p>
+			<div class="btns">
+				<a class="primary" th:href="@{/register}">Get Started</a>
+				<a class="secondary" th:href="@{/login}">Login</a>
+			</div>
+		</div>
+		<div class="right">
+			<div class="mock">
+				<div class="bar"></div>
+				<div class="grid">
+					<div class="box">Income</div>
+					<div class="box">Expenses</div>
+					<div class="box">Budget</div>
+					<div class="box">Analytics</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="features">
+		<h2 class="title">Why Choose SmartSpend?</h2>
+		<p class="sub">Everything you need to understand and improve your financial habits.</p>
+		<div class="cards">
+			<div class="card">
+				<div class="icon">💸</div>
+				<h3>Expense Tracking</h3>
+				<p>Track every expense and organize transactions by category.</p>
+			</div>
+			<div class="card">
+				<div class="icon">📊</div>
+				<h3>Analytics</h3>
+				<p>Interactive reports help you identify spending patterns.</p>
+			</div>
+			<div class="card">
+				<div class="icon">🎯</div>
+				<h3>Budget Planning</h3>
+				<p>Create monthly budgets and stay within your limits.</p>
+			</div>
+			<div class="card">
+				<div class="icon">🔒</div>
+				<h3>Secure Access</h3>
+				<p>User authentication keeps your financial information protected.</p>
+			</div>
+		</div>
+	</section>
+
+	<section id="how">
+		<h2 class="title">How It Works</h2>
+		<div class="steps">
+			<div class="step">
+				<div class="circle">1</div>
+				<h3>Register</h3>
+				<p>Create your account.</p>
+			</div>
+			<div class="step">
+				<div class="circle">2</div>
+				<h3>Add Data</h3>
+				<p>Record income and expenses.</p>
+			</div>
+			<div class="step">
+				<div class="circle">3</div>
+				<h3>Analyze</h3>
+				<p>View charts and reports.</p>
+			</div>
+			<div class="step">
+				<div class="circle">4</div>
+				<h3>Improve</h3>
+				<p>Plan budgets and save more.</p>
+			</div>
+		</div>
+	</section>
+
+	<section>
+		<div class="cta">
+			<h2>Take Control of Your Money Today</h2>
+			<p>Join SmartSpend and start managing your finances with a modern dashboard designed to help you make
+				smarter financial decisions.</p>
+			<div class="btns">
+				<a class="primary" th:href="@{/register}">Create Free Account</a>
+			</div>
+		</div>
+	</section>
+
+	<footer>
+		<h3>SmartSpend</h3>
+		<p>Track • Analyze • Budget • Save</p>
+		<p>© 2026 SmartSpend. Built with Spring Boot, Thymeleaf & Spring Security.</p>
+	</footer>
+</body>
+
+</html>

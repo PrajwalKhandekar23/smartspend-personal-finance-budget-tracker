@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>SmartSpend | Login</title>
+
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+		rel="stylesheet">
+
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			font-family: 'Poppins', sans-serif;
+		}
+
+		body {
+
+			min-height: 100vh;
+
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			background: linear-gradient(135deg, #0F4C3A, #166534);
+
+			overflow: hidden;
+
+		}
+
+		/* Floating Background */
+
+		.circle {
+
+			position: absolute;
+
+			border-radius: 50%;
+
+			background: rgba(255, 255, 255, .08);
+
+			animation: float 9s infinite ease-in-out;
+
+		}
+
+		.circle:nth-child(1) {
+
+			width: 220px;
+			height: 220px;
+
+			top: -80px;
+			left: -70px;
+
+		}
+
+		.circle:nth-child(2) {
+
+			width: 160px;
+			height: 160px;
+
+			bottom: -50px;
+			right: -40px;
+
+			animation-delay: 2s;
+
+		}
+
+		.circle:nth-child(3) {
+
+			width: 90px;
+			height: 90px;
+
+			top: 18%;
+			right: 20%;
+
+			animation-delay: 4s;
+
+		}
+
+		@keyframes float {
+
+			50% {
+				transform: translateY(-30px);
+			}
+
+		}
+
+		/* Login Card */
+
+		.login-card {
+
+			width: 430px;
+
+			background: white;
+
+			padding: 40px;
+
+			border-radius: 22px;
+
+			box-shadow: 0 25px 60px rgba(0, 0, 0, .25);
+
+			animation: fadeUp .8s;
+
+			z-index: 10;
+
+		}
+
+		@keyframes fadeUp {
+
+			from {
+
+				opacity: 0;
+				transform: translateY(40px);
+
+			}
+
+			to {
+
+				opacity: 1;
+				transform: translateY(0);
+
+			}
+
+		}
+
+		.logo {
+
+			font-size: 55px;
+
+			text-align: center;
+
+		}
+
+		h2 {
+
+			text-align: center;
+
+			color: #0F4C3A;
+
+			margin-top: 10px;
+
+		}
+
+		.subtitle {
+
+			text-align: center;
+
+			color: #6b7280;
+
+			margin-bottom: 30px;
+
+			font-size: 14px;
+
+		}
+
+		.form-group {
+
+			margin-bottom: 18px;
+
+		}
+
+		label {
+
+			display: block;
+
+			margin-bottom: 8px;
+
+			font-weight: 500;
+
+			color: #374151;
+
+		}
+
+		.form-control {
+
+			width: 100%;
+
+			padding: 14px 18px;
+
+			border-radius: 12px;
+
+			border: 1px solid #d1d5db;
+
+			transition: .3s;
+
+			outline: none;
+
+		}
+
+		.form-control:focus {
+
+			border-color: #22C55E;
+
+			box-shadow: 0 0 10px rgba(34, 197, 94, .3);
+
+		}
+
+		.btn-login {
+
+			width: 100%;
+
+			padding: 15px;
+
+			border: none;
+
+			border-radius: 12px;
+
+			background: #16A34A;
+
+			color: white;
+
+			font-size: 16px;
+
+			font-weight: 600;
+
+			cursor: pointer;
+
+			transition: .35s;
+
+		}
+
+		.btn-login:hover {
+
+			background: #15803D;
+
+			transform: translateY(-3px);
+
+			box-shadow: 0 15px 30px rgba(22, 163, 74, .35);
+
+		}
+
+		.register {
+
+			text-align: center;
+
+			margin-top: 25px;
+
+			color: #6b7280;
+
+		}
+
+		.register a {
+
+			color: #16A34A;
+
+			font-weight: 600;
+
+			text-decoration: none;
+
+		}
+
+		.register a:hover {
+
+			text-decoration: underline;
+
+		}
+
+		.footer {
+
+			text-align: center;
+
+			font-size: 12px;
+
+			color: #9ca3af;
+
+			margin-top: 20px;
+
+		}
+
+		@media(max-width:500px) {
+
+			.login-card {
+
+				width: 92%;
+
+				padding: 30px;
+
+			}
+
+		}
+	</style>
+
+</head>
+
+<body>
+
+	<div class="circle"></div>
+	<div class="circle"></div>
+	<div class="circle"></div>
+
+	<div class="login-card">
+
+		<div class="logo">
+
+			💰
+
+		</div>
+
+		<h2>Welcome Back</h2>
+
+		<p class="subtitle">
+
+			Login to continue managing your finances.
+
+		</p>
+
+		<form th:action="@{/login}" method="post">
+
+			<div class="form-group">
+
+				<label>Email Address</label>
+
+				<input type="email" name="username" class="form-control" placeholder="Enter your email">
+
+			</div>
+
+			<div class="form-group">
+
+				<label>Password</label>
+
+				<input type="password" name="password" class="form-control" placeholder="Enter your password">
+
+			</div>
+
+			<button type="submit" class="btn-login">
+
+				Login
+
+			</button>
+
+			<p class="register">
+
+				Don't have an account?
+
+				<a th:href="@{/register}">
+
+					Create Account
+
+				</a>
+
+			</p>
+
+			<div class="footer">
+
+				© 2026 SmartSpend • Secure Login
+
+			</div>
+
+		</form>
+
+	</div>
+
+</body>
+
+</html>

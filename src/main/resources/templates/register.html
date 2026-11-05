@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>SmartSpend | Register</title>
+
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+		rel="stylesheet">
+
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			font-family: 'Poppins', sans-serif;
+		}
+
+		body {
+
+			min-height: 100vh;
+
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			background: linear-gradient(135deg, #0F4C3A, #166534);
+
+			overflow: hidden;
+
+		}
+
+		/* Floating Circles */
+
+		.circle {
+
+			position: absolute;
+
+			border-radius: 50%;
+
+			background: rgba(255, 255, 255, .08);
+
+			animation: float 10s infinite ease-in-out;
+
+		}
+
+		.circle:nth-child(1) {
+
+			width: 220px;
+			height: 220px;
+
+			top: -80px;
+			left: -70px;
+
+		}
+
+		.circle:nth-child(2) {
+
+			width: 160px;
+			height: 160px;
+
+			bottom: -50px;
+			right: -50px;
+
+			animation-delay: 2s;
+
+		}
+
+		.circle:nth-child(3) {
+
+			width: 80px;
+			height: 80px;
+
+			right: 20%;
+			top: 18%;
+
+			animation-delay: 4s;
+
+		}
+
+		@keyframes float {
+
+			50% {
+
+				transform: translateY(-30px);
+
+			}
+
+		}
+
+		/* Card */
+
+		.register-card {
+
+			width: 630px;
+
+			background: white;
+
+			border-radius: 25px;
+
+			padding: 40px;
+
+			box-shadow: 0 25px 60px rgba(0, 0, 0, .25);
+
+			animation: fadeUp .8s;
+
+			z-index: 10;
+
+		}
+
+		@keyframes fadeUp {
+
+			from {
+
+				opacity: 0;
+				transform: translateY(40px);
+
+			}
+
+			to {
+
+				opacity: 1;
+				transform: translateY(0);
+
+			}
+
+		}
+
+		.logo {
+
+			text-align: center;
+
+			font-size: 55px;
+
+		}
+
+		h2 {
+
+			text-align: center;
+
+			color: #0F4C3A;
+
+			margin-top: 10px;
+
+		}
+
+		.subtitle {
+
+			text-align: center;
+
+			color: #6b7280;
+
+			margin-bottom: 30px;
+
+			font-size: 14px;
+
+		}
+
+		.form-group {
+
+			margin-bottom: 18px;
+
+		}
+
+		label {
+
+			display: block;
+
+			margin-bottom: 8px;
+
+			color: #374151;
+
+			font-weight: 500;
+
+		}
+
+		.form-control {
+
+			width: 100%;
+
+			padding: 14px 18px;
+
+			border-radius: 12px;
+
+			border: 1px solid #d1d5db;
+
+			outline: none;
+
+			transition: .3s;
+
+			font-size: 15px;
+
+		}
+
+		.form-control:focus {
+
+			border-color: #22C55E;
+
+			box-shadow: 0 0 12px rgba(34, 197, 94, .3);
+
+		}
+
+		.btn-register {
+
+			width: 100%;
+
+			padding: 15px;
+
+			border: none;
+
+			border-radius: 12px;
+
+			background: #16A34A;
+
+			color: white;
+
+			font-size: 16px;
+
+			font-weight: 600;
+
+			cursor: pointer;
+
+			transition: .35s;
+
+		}
+
+		.btn-register:hover {
+
+			background: #15803D;
+
+			transform: translateY(-3px);
+
+			box-shadow: 0 15px 30px rgba(22, 163, 74, .35);
+
+		}
+
+		.login-text {
+
+			text-align: center;
+
+			margin-top: 25px;
+
+			color: #6b7280;
+
+		}
+
+		.login-text a {
+
+			color: #16A34A;
+
+			text-decoration: none;
+
+			font-weight: 600;
+
+		}
+
+		.login-text a:hover {
+
+			text-decoration: underline;
+
+		}
+
+		.footer-text {
+
+			text-align: center;
+
+			font-size: 12px;
+
+			color: #9ca3af;
+
+			margin-top: 20px;
+
+		}
+
+		@media(max-width:500px) {
+
+			.register-card {
+
+				width: 92%;
+
+				padding: 30px;
+
+			}
+
+		}
+	</style>
+
+</head>
+
+<body>
+
+	<div class="circle"></div>
+	<div class="circle"></div>
+	<div class="circle"></div>
+
+	<div class="register-card">
+
+		<div class="logo">
+			💰
+		</div>
+
+		<h2>Create Account</h2>
+
+		<p class="subtitle">
+
+			Join SmartSpend and start managing your finances smarter.
+
+		</p>
+
+		<form th:action="@{/register}" th:object="${user}" method="post">
+
+			<div class="form-group">
+
+				<label>Full Name</label>
+
+				<input type="text" th:field="*{name}" class="form-control" placeholder="Enter your full name">
+
+			</div>
+
+			<div class="form-group">
+
+				<label>Email Address</label>
+
+				<input type="email" th:field="*{email}" class="form-control" placeholder="Enter your email">
+
+			</div>
+
+			<div class="form-group">
+
+				<label>Password</label>
+
+				<input type="password" th:field="*{password}" class="form-control" placeholder="Create password">
+
+			</div>
+
+			<div class="form-group">
+
+				<label>Confirm Password</label>
+
+				<input type="password" name="confirmPassword" class="form-control" placeholder="Confirm password">
+
+			</div>
+
+			<button class="btn-register" type="submit">
+
+				Create Account
+
+			</button>
+
+			<p class="login-text">
+
+				Already have an account?
+
+				<a th:href="@{/login}">
+
+					Login
+
+				</a>
+
+			</p>
+
+			<div class="footer-text">
+
+				© 2026 SmartSpend • Secure Expense Management
+
+			</div>
+
+		</form>
+
+	</div>
+
+</body>
+
+</html>
